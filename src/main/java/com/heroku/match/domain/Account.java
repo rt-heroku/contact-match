@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
+@Table(name="account", schema="salesforce")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
