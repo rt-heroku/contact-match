@@ -11,7 +11,6 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="lead", schema="intake")
-@NamedQuery(name="Lead.findAll", query="SELECT l FROM Lead l")
 public class IntakeLead implements Serializable {
 	private static final long serialVersionUID = 1L;
 
