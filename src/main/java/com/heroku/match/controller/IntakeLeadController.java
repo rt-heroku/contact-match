@@ -57,7 +57,7 @@ public class IntakeLeadController {
     public ResponseEntity<List<IntakeLead>> findAll(
            @RequestParam(value = "page", defaultValue = "1") int pageNumber,
            @RequestParam(required = false) String intakeLead) {
-        if (StringUtils.hasText(intakeLead)) {
+        if (!StringUtils.hasText(intakeLead)) {
             return ResponseEntity.ok(nameService.findAll(pageNumber, ROW_PER_PAGE));
         } else {
             return ResponseEntity.ok(nameService.findAllByName(intakeLead, pageNumber, ROW_PER_PAGE));

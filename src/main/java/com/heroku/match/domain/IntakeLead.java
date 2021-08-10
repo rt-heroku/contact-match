@@ -18,10 +18,10 @@ public class IntakeLead implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private double annualrevenue;
+	private Double annualrevenue;
 
 	@Column(name="average_rating__c")
-	private double averageRatingC;
+	private Double averageRatingC;
 
 	private String city;
 
@@ -53,14 +53,14 @@ public class IntakeLead implements Serializable {
 
 	private String lastname;
 
-	private double latitude;
+	private Double latitude;
 
 	@Column(name="lead_number__c")
 	private String leadNumberC;
 
 	private String leadsource;
 
-	private double longitude;
+	private Double longitude;
 
 	private String mobilephone;
 
@@ -80,7 +80,7 @@ public class IntakeLead implements Serializable {
 	private String regionC;
 
 	@Column(name="reviews_count__c")
-	private double reviewsCountC;
+	private Double reviewsCountC;
 
 	private String salutation;
 
@@ -107,19 +107,19 @@ public class IntakeLead implements Serializable {
 		this.id = id;
 	}
 
-	public double getAnnualrevenue() {
+	public Double getAnnualrevenue() {
 		return this.annualrevenue;
 	}
 
-	public void setAnnualrevenue(double annualrevenue) {
+	public void setAnnualrevenue(Double annualrevenue) {
 		this.annualrevenue = annualrevenue;
 	}
 
-	public double getAverageRatingC() {
+	public Double getAverageRatingC() {
 		return this.averageRatingC;
 	}
 
-	public void setAverageRatingC(double averageRatingC) {
+	public void setAverageRatingC(Double averageRatingC) {
 		this.averageRatingC = averageRatingC;
 	}
 
@@ -227,11 +227,11 @@ public class IntakeLead implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public double getLatitude() {
+	public Double getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -251,11 +251,11 @@ public class IntakeLead implements Serializable {
 		this.leadsource = leadsource;
 	}
 
-	public double getLongitude() {
+	public Double getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -323,11 +323,11 @@ public class IntakeLead implements Serializable {
 		this.regionC = regionC;
 	}
 
-	public double getReviewsCountC() {
+	public Double getReviewsCountC() {
 		return this.reviewsCountC;
 	}
 
-	public void setReviewsCountC(double reviewsCountC) {
+	public void setReviewsCountC(Double reviewsCountC) {
 		this.reviewsCountC = reviewsCountC;
 	}
 
