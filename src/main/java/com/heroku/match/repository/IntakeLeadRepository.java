@@ -13,7 +13,7 @@ public interface IntakeLeadRepository extends PagingAndSortingRepository<IntakeL
         JpaSpecificationExecutor<IntakeLead> {
 	
 	
-	@Query(value="SELECT * FROM names WHERE SIMILARITY(_name,:name) > 0.43 ORDER BY similarity (_name,:name) DESC",
+	@Query(value="SELECT * FROM names WHERE SIMILARITY(_name,:name) > 0.6 ORDER BY similarity (_name,:name) DESC",
 			  nativeQuery = true)
 	Page<IntakeLead> findNameBySimilarity(@Param("name") String name, Pageable p);
 	
