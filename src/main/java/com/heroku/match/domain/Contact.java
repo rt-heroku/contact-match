@@ -80,9 +80,9 @@ public class Contact implements Serializable {
 
 	private String mailinggeocodeaccuracy;
 
-	private double mailinglatitude;
+	private Double mailinglatitude;
 
-	private double mailinglongitude;
+	private Double mailinglongitude;
 
 	private String mailingpostalcode;
 
@@ -116,7 +116,7 @@ public class Contact implements Serializable {
 	private Timestamp piPardotLastScoredAt;
 
 	@Column(name="pi__score__c")
-	private double piScore;
+	private Double piScore;
 
 	private String recordtypeid;
 
@@ -374,19 +374,19 @@ public class Contact implements Serializable {
 		this.mailinggeocodeaccuracy = mailinggeocodeaccuracy;
 	}
 
-	public double getMailinglatitude() {
+	public Double getMailinglatitude() {
 		return this.mailinglatitude;
 	}
 
-	public void setMailinglatitude(double mailinglatitude) {
+	public void setMailinglatitude(Double mailinglatitude) {
 		this.mailinglatitude = mailinglatitude;
 	}
 
-	public double getMailinglongitude() {
+	public Double getMailinglongitude() {
 		return this.mailinglongitude;
 	}
 
-	public void setMailinglongitude(double mailinglongitude) {
+	public void setMailinglongitude(Double mailinglongitude) {
 		this.mailinglongitude = mailinglongitude;
 	}
 
@@ -494,11 +494,11 @@ public class Contact implements Serializable {
 		this.piPardotLastScoredAt = piPardotLastScoredAt;
 	}
 
-	public double getPiScore() {
+	public Double getPiScore() {
 		return this.piScore;
 	}
 
-	public void setPiScore(double piScore) {
+	public void setPiScore(Double piScore) {
 		this.piScore = piScore;
 	}
 

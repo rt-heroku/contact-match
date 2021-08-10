@@ -23,7 +23,7 @@ public class Account implements Serializable {
 
 	private String accountsource;
 
-	private double annualrevenue;
+	private Double annualrevenue;
 
 	private String billingcity;
 
@@ -31,9 +31,9 @@ public class Account implements Serializable {
 
 	private String billinggeocodeaccuracy;
 
-	private double billinglatitude;
+	private Double billinglatitude;
 
-	private double billinglongitude;
+	private Double billinglongitude;
 
 	private String billingpostalcode;
 
@@ -85,9 +85,9 @@ public class Account implements Serializable {
 
 	private String shippinggeocodeaccuracy;
 
-	private double shippinglatitude;
+	private Double shippinglatitude;
 
-	private double shippinglongitude;
+	private Double shippinglongitude;
 
 	private String shippingpostalcode;
 
@@ -132,11 +132,11 @@ public class Account implements Serializable {
 		this.accountsource = accountsource;
 	}
 
-	public double getAnnualrevenue() {
+	public Double getAnnualrevenue() {
 		return this.annualrevenue;
 	}
 
-	public void setAnnualrevenue(double annualrevenue) {
+	public void setAnnualrevenue(Double annualrevenue) {
 		this.annualrevenue = annualrevenue;
 	}
 
@@ -164,19 +164,19 @@ public class Account implements Serializable {
 		this.billinggeocodeaccuracy = billinggeocodeaccuracy;
 	}
 
-	public double getBillinglatitude() {
+	public Double getBillinglatitude() {
 		return this.billinglatitude;
 	}
 
-	public void setBillinglatitude(double billinglatitude) {
+	public void setBillinglatitude(Double billinglatitude) {
 		this.billinglatitude = billinglatitude;
 	}
 
-	public double getBillinglongitude() {
+	public Double getBillinglongitude() {
 		return this.billinglongitude;
 	}
 
-	public void setBillinglongitude(double billinglongitude) {
+	public void setBillinglongitude(Double billinglongitude) {
 		this.billinglongitude = billinglongitude;
 	}
 
@@ -372,19 +372,19 @@ public class Account implements Serializable {
 		this.shippinggeocodeaccuracy = shippinggeocodeaccuracy;
 	}
 
-	public double getShippinglatitude() {
+	public Double getShippinglatitude() {
 		return this.shippinglatitude;
 	}
 
-	public void setShippinglatitude(double shippinglatitude) {
+	public void setShippinglatitude(Double shippinglatitude) {
 		this.shippinglatitude = shippinglatitude;
 	}
 
-	public double getShippinglongitude() {
+	public Double getShippinglongitude() {
 		return this.shippinglongitude;
 	}
 
-	public void setShippinglongitude(double shippinglongitude) {
+	public void setShippinglongitude(Double shippinglongitude) {
 		this.shippinglongitude = shippinglongitude;
 	}
 
