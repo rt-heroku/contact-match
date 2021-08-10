@@ -23,30 +23,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.heroku.match.domain.IncomingLead;
+import com.heroku.match.domain.Contact;
 import com.heroku.match.exception.BadResourceException;
 import com.heroku.match.exception.ResourceAlreadyExistsException;
 import com.heroku.match.exception.ResourceNotFoundException;
-import com.heroku.match.service.IncomingLeadService;
+import com.heroku.match.service.ContactService;
 
 
 @RestController
-@RequestMapping("/api/incomingleads")
-public class IncomingLeadController {
+@RequestMapping("/api/contacts")
+public class ContactController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final int ROW_PER_PAGE = 5;
 
     @Autowired
-    private IncomingLeadService incomingLeadService;
+    private ContactService contactService;
 
     @GetMapping(value = "/similarity", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<IncomingLead>> findIncomingLeadBySimilarity(
+    public ResponseEntity<List<Contact>> findContactBySimilarity(
              @RequestParam(value = "page", defaultValue = "1") int pageNumber,
              @RequestParam(required = false) String name) {
     	try {
-    		List<IncomingLead> names = incomingLeadService.findBySimilarity(name, pageNumber, ROW_PER_PAGE);
+    		List<Contact> names = contactService.findBySimilarity(name, pageNumber, ROW_PER_PAGE);
 			return ResponseEntity.ok(names);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -54,35 +54,35 @@ public class IncomingLeadController {
 }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<IncomingLead>> findAll(
+    public ResponseEntity<List<Contact>> findAll(
            @RequestParam(value = "page", defaultValue = "1") int pageNumber,
            @RequestParam(required = false) String name) {
         if (!StringUtils.hasText(name)) {
-            return ResponseEntity.ok(incomingLeadService.findAll(pageNumber, ROW_PER_PAGE));
+            return ResponseEntity.ok(contactService.findAll(pageNumber, ROW_PER_PAGE));
         } else {
-            return ResponseEntity.ok(incomingLeadService.findAllByName(name, pageNumber, ROW_PER_PAGE));
+            return ResponseEntity.ok(contactService.findAllByName(name, pageNumber, ROW_PER_PAGE));
         }
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IncomingLead> findIncomingLeadById(
+    public ResponseEntity<Contact> findContactById(
             @PathVariable long id) {
         try {
-            IncomingLead incomingLead = incomingLeadService.findById(id);
-            return ResponseEntity.ok(incomingLead);  // return 200, with json body
+            Contact contact = contactService.findById(id);
+            return ResponseEntity.ok(contact);  // return 200, with json body
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // return 404, with null body
         }
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<IncomingLead> addIncomingLead(
-            @Valid @RequestBody IncomingLead intakeLead)
+    public ResponseEntity<Contact> addContact(
+            @Valid @RequestBody Contact contact)
             throws URISyntaxException {
         try {
-            IncomingLead newIncomingLead = incomingLeadService.save(intakeLead);
-            return ResponseEntity.created(new URI("/api/incomingleads/" + newIncomingLead.getId()))
-                    .body(intakeLead);
+            Contact newContact = contactService.save(contact);
+            return ResponseEntity.created(new URI("/api/names/" + newContact.getId()))
+                    .body(contact);
         } catch (ResourceAlreadyExistsException ex) {
             // log exception first, then return Conflict (409)
             logger.error(ex.getMessage());
@@ -95,12 +95,12 @@ public class IncomingLeadController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<IncomingLead> updateIncomingLead(
+    public ResponseEntity<Contact> updateContact(
             @PathVariable long id,
-            @Valid @RequestBody IncomingLead incomingLead) {
+            @Valid @RequestBody Contact contact) {
         try {
-            incomingLead.setId(id);
-            incomingLeadService.update(incomingLead);
+            contact.setId(id);
+            contactService.update(contact);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             // log exception first, then return Not Found (404)
@@ -115,10 +115,10 @@ public class IncomingLeadController {
 
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> deleteIncomingLeadById(
+    public ResponseEntity<Void> deleteContactById(
             @PathVariable long id) {
         try {
-            incomingLeadService.deleteById(id);
+            contactService.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             logger.error(ex.getMessage());

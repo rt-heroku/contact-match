@@ -53,7 +53,7 @@ public class IntakeLeadController {
         }
 }
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<IntakeLead>> findAll(
            @RequestParam(value = "page", defaultValue = "1") int pageNumber,
            @RequestParam(required = false) String name) {
@@ -75,7 +75,7 @@ public class IntakeLeadController {
         }
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "")
     public ResponseEntity<IntakeLead> addIntakeLead(
             @Valid @RequestBody IntakeLead intakeLead)
             throws URISyntaxException {
