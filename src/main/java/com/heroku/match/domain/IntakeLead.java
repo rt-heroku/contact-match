@@ -21,31 +21,31 @@ public class IntakeLead implements Serializable {
 	private Double annualrevenue;
 
 	@Column(name="average_rating__c")
-	private Double averageRatingC;
+	private Double averageRating;
 
 	private String city;
 
 	private String company;
 
 	@Column(name="competitor__c")
-	private String competitorC;
+	private String competitor;
 
 	private String country;
 
 	private Timestamp createddate;
 
 	@Column(name="cuisines__c")
-	private String cuisinesC;
+	private String cuisines;
 
 	private String description;
 
 	@Column(name="doordash_id__c")
-	private String doordashIdC;
+	private String doordashId;
 
 	private String email;
 
 	@Column(name="external_id__c")
-	private String externalIdC;
+	private String externalId;
 
 	private String firstname;
 
@@ -56,7 +56,7 @@ public class IntakeLead implements Serializable {
 	private Double latitude;
 
 	@Column(name="lead_number__c")
-	private String leadNumberC;
+	private String leadNumber;
 
 	private String leadsource;
 
@@ -77,10 +77,11 @@ public class IntakeLead implements Serializable {
 	private String rating;
 
 	@Column(name="region__c")
-	private String regionC;
+	private String region
+	;
 
 	@Column(name="reviews_count__c")
-	private Double reviewsCountC;
+	private Double reviewsCount;
 
 	private String salutation;
 
@@ -100,7 +101,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Long id) {
@@ -108,23 +109,23 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Double getAnnualrevenue() {
-		return this.annualrevenue;
+		return annualrevenue;
 	}
 
 	public void setAnnualrevenue(Double annualrevenue) {
 		this.annualrevenue = annualrevenue;
 	}
 
-	public Double getAverageRatingC() {
-		return this.averageRatingC;
+	public Double getAverageRating() {
+		return averageRating;
 	}
 
-	public void setAverageRatingC(Double averageRatingC) {
-		this.averageRatingC = averageRatingC;
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
 	}
 
 	public String getCity() {
-		return this.city;
+		return city;
 	}
 
 	public void setCity(String city) {
@@ -132,23 +133,23 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getCompany() {
-		return this.company;
+		return company;
 	}
 
 	public void setCompany(String company) {
 		this.company = company;
 	}
 
-	public String getCompetitorC() {
-		return this.competitorC;
+	public String getCompetitor() {
+		return competitor;
 	}
 
-	public void setCompetitorC(String competitorC) {
-		this.competitorC = competitorC;
+	public void setCompetitor(String competitor) {
+		this.competitor = competitor;
 	}
 
 	public String getCountry() {
-		return this.country;
+		return country;
 	}
 
 	public void setCountry(String country) {
@@ -156,55 +157,55 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Timestamp getCreateddate() {
-		return this.createddate;
+		return createddate;
 	}
 
 	public void setCreateddate(Timestamp createddate) {
 		this.createddate = createddate;
 	}
 
-	public String getCuisinesC() {
-		return this.cuisinesC;
+	public String getCuisines() {
+		return cuisines;
 	}
 
-	public void setCuisinesC(String cuisinesC) {
-		this.cuisinesC = cuisinesC;
+	public void setCuisines(String cuisines) {
+		this.cuisines = cuisines;
 	}
 
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getDoordashIdC() {
-		return this.doordashIdC;
+	public String getDoordashId() {
+		return doordashId;
 	}
 
-	public void setDoordashIdC(String doordashIdC) {
-		this.doordashIdC = doordashIdC;
+	public void setDoordashId(String doordashId) {
+		this.doordashId = doordashId;
 	}
 
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getExternalIdC() {
-		return this.externalIdC;
+	public String getExternalId() {
+		return externalId;
 	}
 
-	public void setExternalIdC(String externalIdC) {
-		this.externalIdC = externalIdC;
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public String getFirstname() {
-		return this.firstname;
+		return firstname;
 	}
 
 	public void setFirstname(String firstname) {
@@ -212,7 +213,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getIndustry() {
-		return this.industry;
+		return industry;
 	}
 
 	public void setIndustry(String industry) {
@@ -220,7 +221,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getLastname() {
-		return this.lastname;
+		return lastname;
 	}
 
 	public void setLastname(String lastname) {
@@ -228,23 +229,23 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Double getLatitude() {
-		return this.latitude;
+		return latitude;
 	}
 
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLeadNumberC() {
-		return this.leadNumberC;
+	public String getLeadNumber() {
+		return leadNumber;
 	}
 
-	public void setLeadNumberC(String leadNumberC) {
-		this.leadNumberC = leadNumberC;
+	public void setLeadNumber(String leadNumber) {
+		this.leadNumber = leadNumber;
 	}
 
 	public String getLeadsource() {
-		return this.leadsource;
+		return leadsource;
 	}
 
 	public void setLeadsource(String leadsource) {
@@ -252,7 +253,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Double getLongitude() {
-		return this.longitude;
+		return longitude;
 	}
 
 	public void setLongitude(Double longitude) {
@@ -260,7 +261,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getMobilephone() {
-		return this.mobilephone;
+		return mobilephone;
 	}
 
 	public void setMobilephone(String mobilephone) {
@@ -268,7 +269,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -276,7 +277,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public Integer getNumberofemployees() {
-		return this.numberofemployees;
+		return numberofemployees;
 	}
 
 	public void setNumberofemployees(Integer numberofemployees) {
@@ -284,7 +285,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getPhone() {
-		return this.phone;
+		return phone;
 	}
 
 	public void setPhone(String phone) {
@@ -292,7 +293,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getPhotourl() {
-		return this.photourl;
+		return photourl;
 	}
 
 	public void setPhotourl(String photourl) {
@@ -300,7 +301,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getPostalcode() {
-		return this.postalcode;
+		return postalcode;
 	}
 
 	public void setPostalcode(String postalcode) {
@@ -308,31 +309,31 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getRating() {
-		return this.rating;
+		return rating;
 	}
 
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
 
-	public String getRegionC() {
-		return this.regionC;
+	public String getRegion() {
+		return region;
 	}
 
-	public void setRegionC(String regionC) {
-		this.regionC = regionC;
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
-	public Double getReviewsCountC() {
-		return this.reviewsCountC;
+	public Double getReviewsCount() {
+		return reviewsCount;
 	}
 
-	public void setReviewsCountC(Double reviewsCountC) {
-		this.reviewsCountC = reviewsCountC;
+	public void setReviewsCount(Double reviewsCount) {
+		this.reviewsCount = reviewsCount;
 	}
 
 	public String getSalutation() {
-		return this.salutation;
+		return salutation;
 	}
 
 	public void setSalutation(String salutation) {
@@ -340,7 +341,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getSfid() {
-		return this.sfid;
+		return sfid;
 	}
 
 	public void setSfid(String sfid) {
@@ -348,7 +349,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getState() {
-		return this.state;
+		return state;
 	}
 
 	public void setState(String state) {
@@ -356,7 +357,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
 
 	public void setStatus(String status) {
@@ -364,7 +365,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getStreet() {
-		return this.street;
+		return street;
 	}
 
 	public void setStreet(String street) {
@@ -372,7 +373,7 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	public void setTitle(String title) {
@@ -380,11 +381,17 @@ public class IntakeLead implements Serializable {
 	}
 
 	public String getWebsite() {
-		return this.website;
+		return website;
 	}
 
 	public void setWebsite(String website) {
 		this.website = website;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 }
