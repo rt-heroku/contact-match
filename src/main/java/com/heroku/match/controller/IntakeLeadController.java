@@ -31,7 +31,7 @@ import com.heroku.match.service.IntakeLeadService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/intakeleads")
 public class IntakeLeadController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -39,48 +39,48 @@ public class IntakeLeadController {
     private final int ROW_PER_PAGE = 5;
 
     @Autowired
-    private IntakeLeadService nameService;
+    private IntakeLeadService intakeLeadService;
 
     @GetMapping(value = "/similarity", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<IntakeLead>> findIntakeLeadBySimilarity(
              @RequestParam(value = "page", defaultValue = "1") int pageNumber,
-             @RequestParam(required = false) String intakeLead) {
+             @RequestParam(required = false) String name) {
     	try {
-    		List<IntakeLead> names = nameService.findBySimilarity(intakeLead, pageNumber, ROW_PER_PAGE);
+    		List<IntakeLead> names = intakeLeadService.findBySimilarity(name, pageNumber, ROW_PER_PAGE);
 			return ResponseEntity.ok(names);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 }
 
-    @GetMapping(value = "/names", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<IntakeLead>> findAll(
            @RequestParam(value = "page", defaultValue = "1") int pageNumber,
-           @RequestParam(required = false) String intakeLead) {
-        if (!StringUtils.hasText(intakeLead)) {
-            return ResponseEntity.ok(nameService.findAll(pageNumber, ROW_PER_PAGE));
+           @RequestParam(required = false) String name) {
+        if (!StringUtils.hasText(name)) {
+            return ResponseEntity.ok(intakeLeadService.findAll(pageNumber, ROW_PER_PAGE));
         } else {
-            return ResponseEntity.ok(nameService.findAllByName(intakeLead, pageNumber, ROW_PER_PAGE));
+            return ResponseEntity.ok(intakeLeadService.findAllByName(name, pageNumber, ROW_PER_PAGE));
         }
     }
 
-    @GetMapping(value = "/names/{nameId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IntakeLead> findIntakeLeadById(
-            @PathVariable long nameId) {
+            @PathVariable long id) {
         try {
-            IntakeLead intakeLead = nameService.findById(nameId);
+            IntakeLead intakeLead = intakeLeadService.findById(id);
             return ResponseEntity.ok(intakeLead);  // return 200, with json body
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // return 404, with null body
         }
     }
 
-    @PostMapping(value = "/names")
+    @PostMapping(value = "/")
     public ResponseEntity<IntakeLead> addIntakeLead(
             @Valid @RequestBody IntakeLead intakeLead)
             throws URISyntaxException {
         try {
-            IntakeLead newIntakeLead = nameService.save(intakeLead);
+            IntakeLead newIntakeLead = intakeLeadService.save(intakeLead);
             return ResponseEntity.created(new URI("/api/names/" + newIntakeLead.getId()))
                     .body(intakeLead);
         } catch (ResourceAlreadyExistsException ex) {
@@ -94,13 +94,13 @@ public class IntakeLeadController {
         }
     }
 
-    @PutMapping(value = "/names/{nameId}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<IntakeLead> updateIntakeLead(
-            @PathVariable long nameId,
+            @PathVariable long id,
             @Valid @RequestBody IntakeLead intakeLead) {
         try {
-            intakeLead.setId(nameId);
-            nameService.update(intakeLead);
+            intakeLead.setId(id);
+            intakeLeadService.update(intakeLead);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             // log exception first, then return Not Found (404)
@@ -114,11 +114,11 @@ public class IntakeLeadController {
     }
 
 
-    @DeleteMapping(path = "/names/{nameId}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteIntakeLeadById(
-            @PathVariable long nameId) {
+            @PathVariable long id) {
         try {
-            nameService.deleteById(nameId);
+            intakeLeadService.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             logger.error(ex.getMessage());
