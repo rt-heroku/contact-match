@@ -13,7 +13,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
         JpaSpecificationExecutor<Account> {
 	
 	
-	@Query(value="SELECT * FROM salesforce.account WHERE SIMILARITY(name,:name) > 0.6 ORDER BY similarity (name,:name) DESC",
+	@Query(value="SELECT * FROM salesforce.account WHERE SIMILARITY(_name,:name) > 0.6 ORDER BY similarity (_name,:name) DESC",
 			  nativeQuery = true)
 	Page<Account> findNameBySimilarity(@Param("name") String name, Pageable p);
 	
