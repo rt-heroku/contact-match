@@ -81,7 +81,7 @@ public class LeadController {
             throws URISyntaxException {
         try {
             Lead newLead = leadService.save(lead);
-            return ResponseEntity.created(new URI("/api/names/" + newLead.getId()))
+            return ResponseEntity.created(new URI("/api/leads/" + newLead.getId()))
                     .body(lead);
         } catch (ResourceAlreadyExistsException ex) {
             // log exception first, then return Conflict (409)

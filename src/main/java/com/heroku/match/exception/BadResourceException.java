@@ -16,6 +16,20 @@ public class BadResourceException extends Exception {
 
     public BadResourceException(String msg) {
         super(msg);
+		Throwable t = this.getCause();
+		while (t != null) {
+			this.addErrorMessage(t.getLocalizedMessage());
+			t = t.getCause();
+		}
+    }
+
+    public BadResourceException(String msg, Throwable e) {
+        super(msg);
+		Throwable t = e.getCause();
+		while (t != null) {
+			this.addErrorMessage(t.getLocalizedMessage());
+			t = t.getCause();
+		}
     }
     
     /**

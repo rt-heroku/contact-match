@@ -81,7 +81,7 @@ public class ContactController {
             throws URISyntaxException {
         try {
             Contact newContact = contactService.save(contact);
-            return ResponseEntity.created(new URI("/api/names/" + newContact.getId()))
+            return ResponseEntity.created(new URI("/api/contacts/" + newContact.getId()))
                     .body(contact);
         } catch (ResourceAlreadyExistsException ex) {
             // log exception first, then return Conflict (409)

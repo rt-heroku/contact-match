@@ -19,12 +19,12 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="lead", schema="salesforce")
+@Table(name="lead", schema="test")
 public class Lead implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Double annualrevenue;
@@ -174,6 +174,45 @@ public class Lead implements Serializable {
 	private String website;
 
 	public Lead() {
+	}
+
+	public Lead(IntakeLead i) {
+		super();
+		this.annualrevenue = i.getAnnualrevenue();
+		this.averageRating = i.getAverageRating();
+		this.city = i.getCity();
+		this.company = i.getCompany();
+		this.competitor = i.getCompetitor();
+		this.country = i.getCountry();
+		this.leadCreatedDate = i.getCreateddate();
+		this.cuisines = i.getCuisines();
+		this.description = i.getDescription();
+		this.doordashId = i.getDoordashId();
+		this.email = i.getEmail();
+		this.externalId = i.getExternalId();
+		this.firstname = i.getFirstname();
+		this.industry = i.getIndustry();
+		this.isconverted = false;
+		this.isdeleted = false;
+		this.islocked = false;
+		this.lastname = i.getLastname();
+		this.latitude = i.getLatitude();
+		this.leadNumber = i.getLeadNumber();
+		this.leadsource = i.getLeadsource();
+		this.longitude = i.getLongitude();
+		this.name = i.getName();
+		this.numberofemployees = i.getNumberofemployees();
+		this.phone = i.getPhone();
+		this.photourl = i.getPhotourl();
+		this.postalcode = i.getPostalcode();
+		this.rating = i.getRating();
+		this.region = i.getRegion();
+		this.reviewsCount = i.getReviewsCount();
+		this.state = i.getState();
+		this.status = i.getStatus();
+		this.street = i.getStreet();
+		this.title = i.getTitle();
+		this.website = i.getWebsite();
 	}
 
 	public Long getId() {

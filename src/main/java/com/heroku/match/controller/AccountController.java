@@ -81,7 +81,7 @@ public class AccountController {
             throws URISyntaxException {
         try {
             Account newAccount = accountService.save(account);
-            return ResponseEntity.created(new URI("/api/names/" + newAccount.getId()))
+            return ResponseEntity.created(new URI("/api/accounts/" + newAccount.getId()))
                     .body(account);
         } catch (ResourceAlreadyExistsException ex) {
             // log exception first, then return Conflict (409)
