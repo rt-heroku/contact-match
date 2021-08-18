@@ -36,7 +36,7 @@ public class MatchedController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final int ROW_PER_PAGE = 5;
+    private final int ROW_PER_PAGE = 100;
 
     @Autowired
     private MatchedService matchedService;

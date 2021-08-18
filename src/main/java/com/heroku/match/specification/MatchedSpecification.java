@@ -29,7 +29,7 @@ public class MatchedSpecification implements Specification<Matched> {
         Predicate p = cb.disjunction();
 
         if (filter.getName() != null) {
-            p.getExpressions().add(cb.like(cb.lower(root.get("_name")), "%" + filter.getName().toLowerCase() + "%"));
+            p.getExpressions().add(cb.like(cb.lower(root.get("name")), "%" + filter.getName().toLowerCase() + "%"));
         }
 
         
