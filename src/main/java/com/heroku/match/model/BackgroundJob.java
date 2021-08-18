@@ -8,16 +8,22 @@ public class BackgroundJob {
 	private List<Matched> matched;
 	
 	private String jobid;
-
+	private UUID uuid;
 	private int size;
+	private String message;
+	
 	
 	public BackgroundJob() {
-		matched = new ArrayList<Matched>();
-		jobid = UUID.randomUUID().toString();
-		size = 0;
+		this.matched = new ArrayList<Matched>();
+		this.uuid = UUID.randomUUID();
+		this.jobid = getUuid().toString();
+		this.size = 0;
 	}
 	public BackgroundJob(String jobid) {
+		this.matched = new ArrayList<Matched>();
 		this.jobid = jobid;
+		this.uuid = UUID.fromString(jobid);
+		this.size = 0;
 	}
 	
 	public List<Matched> getMatched() {
@@ -34,6 +40,15 @@ public class BackgroundJob {
 	}
 	public int size() {
 		return size;
+	}
+	public UUID getUuid() {
+		return uuid;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 

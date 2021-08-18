@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.annotations.Job;
+import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.JobScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,8 +62,7 @@ public class MatchIntakeService {
 	public BackgroundJob analyzeAll(Long start, Long end, boolean save) throws BadResourceException, ResourceNotFoundException {
 		BackgroundJob job = new BackgroundJob();
 		List<Matched> matches = new ArrayList<Matched>();
-
-		String jobid = job.getJobid();
+		String msg = "";
 		
 		if (end < start) end = start + 100;
 		
@@ -72,33 +73,38 @@ public class MatchIntakeService {
 				matches.addAll(analyze(lead, save, job.getJobid()));
 			
 			job.setMatched(matches);
-		} else 
-			jobScheduler.enqueue(() -> this.jobAnalyzeAll(jobid));
+		} else {
+			JobId enqueue = jobScheduler.enqueue(job.getUuid(),() -> this.jobAnalyzeAll(JobContext.Null));
+			msg = "Job successfully enqueued -> [" + enqueue.asUUID().toString() + "]";
+			job.setMessage(msg);
+			log.info(msg);
+		}
 		
 		return job;
 	}
 
 	public BackgroundJob analyzeAll() throws BadResourceException, ResourceNotFoundException {
 		BackgroundJob job = new BackgroundJob();
-		String jobid = job.getJobid();
-		
-		jobScheduler.enqueue(() -> this.jobAnalyzeAll(jobid));
-		log.info("Job successfully enqueued -> [" + jobid + "]");
-		
+		JobId enqueue = jobScheduler.enqueue(job.getUuid(),() -> this.jobAnalyzeAll(JobContext.Null));
+		String msg = "Job successfully enqueued -> [" + enqueue.asUUID().toString() + "]";
+		log.info(msg);
+		job.setMessage(msg);
 		return job;
 	}
 
-	@Job(name = "Analyzing all Leads for JobId[%0]", retries = 1)
-	public void jobAnalyzeAll(String jobid) {
+	@Job(name = "Analyzing all Leads", retries = 1)
+	public void jobAnalyzeAll(JobContext jobContext) {
 		boolean keepSearching = true;
 		long start = 0;
+		
+		jobContext.logger().info("Starting Job [" + jobContext.getJobId() + "] - " + jobContext.getJobName());
 		
 		while (keepSearching) {
 			IHowMany howMany = intakeLeadRepository.findHowManyRecordsToProcess(start);
 			start = howMany.getMinid();
 			long end = start + 100;
 			
-			log.info("JobId[" + jobid + "] - Starting from id:" + start + ", ending in id:" + end + " --- HowMany: " +  howMany);
+			jobContext.logger().info("JobId[" + jobContext.getJobId() + "] - Starting from id:" + start + ", ending in id:" + end + " --- Total Count: " +  howMany.getHowmany());
 			
 			if (howMany.getHowmany() == 0) break;
 
@@ -106,11 +112,11 @@ public class MatchIntakeService {
 			List<Matched> matches = new ArrayList<Matched>();
 			
 			for (IntakeLead lead: intakeLeads) 
-				matches.addAll(analyze(lead, true, jobid));
+				matches.addAll(analyze(lead, true, jobContext.getJobId().toString()));
 
 			start = end + 1;
 			if (start > howMany.getMaxid()) {
-				log.info("JobId[" + jobid + "] - FInished!!! - No more records to find, max id processed was [" + howMany.getMaxid() + "]");
+				jobContext.logger().info("JobId[" + jobContext.getJobId() + "] - FInished!!! - No more records to find, max id processed was [" + howMany.getMaxid() + "]");
 				keepSearching = false;
 			}
 		}

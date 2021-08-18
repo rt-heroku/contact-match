@@ -23,10 +23,12 @@ public class MatchApplication {
 	
 	
 	@Bean
-    public StorageProvider storageProvider(JobMapper jobMapper) {
+    public StorageProvider storageProvider(
+    		JobMapper jobMapper
+    ) {
 		
 		PostgresStorageProvider storageProvider = new PostgresStorageProvider(dataSource);
-        storageProvider.setJobMapper(jobMapper);
+    	storageProvider.setJobMapper(jobMapper);
         return storageProvider;
     }
 
