@@ -22,8 +22,6 @@ public class MatchController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private final String ROW_PER_PAGE = "100";
-
 	@Autowired
 	private MatchIntakeService matchIntakeService;
 
@@ -32,10 +30,7 @@ public class MatchController {
 		try {
 			return ResponseEntity.ok(matchIntakeService.matchAll());
 		} catch (JobException e) {
-			logger.error(e.getMessage());
-			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
-					e.getErrorMessages());
-			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+			return logAndThrowJobException(e);
 		}
 	}
 
@@ -44,10 +39,7 @@ public class MatchController {
 		try {
 			return ResponseEntity.ok(matchIntakeService.analyzeAll());
 		} catch (JobException e) {
-			logger.error(e.getMessage());
-			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
-					e.getErrorMessages());
-			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+			return logAndThrowJobException(e);
 		}
 	}
 
@@ -57,10 +49,7 @@ public class MatchController {
 		try {
 			return ResponseEntity.ok(matchIntakeService.matchLeadByCompanyName(name, null));
 		} catch (JobException e) {
-			logger.error(e.getMessage());
-			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
-					e.getErrorMessages());
-			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+			return logAndThrowJobException(e);
 		}
 	}
 
@@ -69,11 +58,15 @@ public class MatchController {
 		try {
 			return ResponseEntity.ok(matchIntakeService.matchByIdAndSave(id));
 		} catch (JobException e) {
-			logger.error(e.getMessage());
-			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
-					e.getErrorMessages());
-			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+			return logAndThrowJobException(e);
 		}
+	}
+
+	private ResponseEntity<Object> logAndThrowJobException(JobException e) {
+		logger.error(e.getMessage());
+		ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
+				e.getErrorMessages());
+		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 
 }
