@@ -52,7 +52,7 @@ public class MatchedController {
         }
     }
 
-    @GetMapping(value = "/{jobid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/job/{jobid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Matched>> findMatchedByJobId(
             @PathVariable String jobid) {
         try {
