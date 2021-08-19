@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.heroku.match.domain.Lead;
+import com.heroku.match.utils.MatchUtils;
+
 @Entity
 @Table(name="matched", schema="intake")
 public class Matched {
@@ -35,6 +38,31 @@ public class Matched {
 
 	@Column(name="matched_id")
 	private Long matchId;
+	
+	public Matched() {
+		super();
+	}
+	
+	public Matched(String value, String job, Lead lead, String matchColumn, String matchedBy, String matchedTable, String searchTable) {
+		this( true,  value,  job,  lead,  matchColumn,  matchedBy,  matchedTable,  searchTable);
+	}
+
+	public Matched(boolean matched, String value, String job, Lead lead, String matchColumn, String matchedBy, String matchedTable, String searchTable) {
+		super();
+		this.setMatched(matched);
+		this.setMatchId(lead.getId());
+		this.setMatchedValue(lead.getDoordashId());
+		this.setName(lead.getName());
+		this.setEntityMatched(matchedTable);
+		this.setEntitySearch(searchTable);
+		this.setValue(value);
+		this.setColumn(matchColumn);
+		this.setMatchedBy(matchedBy);
+		this.setJob(job);
+		
+		this.setPercentage(1D);
+		this.setData(MatchUtils.toJson(lead));
+	}
 	
 	public String getValue() {
 		return value;
@@ -115,5 +143,19 @@ public class Matched {
 		this.id = id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Matched{" +
+				"matched:" + this.matched + "," +
+				"name:" + this.name + "," +
+				"matchedBy:" + this.matchedBy + "," +
+				"value:" + this.value + "," +
+				"matchedValue:" + this.matchedValue + "," +
+				"percentage:" + this.percentage + "," +
+				"column:" + this.column + "," +
+				"entityMatched:" + this.entityMatched + "," +
+				"entitySearch:" + this.entitySearch + "," +
+				"";
+	}
 	
 }
