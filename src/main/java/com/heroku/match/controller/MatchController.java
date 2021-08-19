@@ -1,5 +1,8 @@
 package com.heroku.match.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.heroku.match.exception.ApiError;
 import com.heroku.match.exception.JobException;
+import com.heroku.match.model.BackgroundJob;
 import com.heroku.match.service.MatchIntakeService;
 
 @RestController
@@ -28,8 +32,10 @@ public class MatchController {
 	@GetMapping(value = "/intake", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> match() {
 		try {
-			return ResponseEntity.ok(matchIntakeService.matchAll());
-		} catch (JobException e) {
+			BackgroundJob job = matchIntakeService.matchAll();
+			return ResponseEntity.created(new URI("/api/jobs/" + job.getJobid()))
+                    .body(job);
+		} catch (JobException | URISyntaxException e) {
 			return logAndThrowJobException(e);
 		}
 	}
@@ -37,8 +43,10 @@ public class MatchController {
 	@GetMapping(value = "/intake/analyze", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> analyzeAll() {
 		try {
-			return ResponseEntity.ok(matchIntakeService.analyzeAll());
-		} catch (JobException e) {
+			BackgroundJob job = matchIntakeService.analyzeAll();
+			return ResponseEntity.created(new URI("/api/jobs/" + job.getJobid()))
+                    .body(job);
+		} catch (JobException | URISyntaxException e) {
 			return logAndThrowJobException(e);
 		}
 	}
@@ -62,10 +70,10 @@ public class MatchController {
 		}
 	}
 
-	private ResponseEntity<Object> logAndThrowJobException(JobException e) {
+	private ResponseEntity<Object> logAndThrowJobException(Exception e) {
 		logger.error(e.getMessage());
 		ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage(),
-				e.getErrorMessages());
+				e.getMessage());
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 
