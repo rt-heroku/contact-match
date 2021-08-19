@@ -26,10 +26,10 @@ public class MatchedService {
         return matchedRepository.existsById(id);
     }
     
-    public Matched findById(Long id) throws ResourceNotFoundException {
-    	Matched il = matchedRepository.findById(id).orElse(null);
-        if (il==null) {
-            throw new ResourceNotFoundException("Cannot find Name with id: " + id);
+    public List<Matched> findByJobId(String id) throws ResourceNotFoundException {
+    	List<Matched>il = matchedRepository.findByJob(id);
+        if (il==null || il.size() == 0) {
+            throw new ResourceNotFoundException("Cannot find Matches with jobid: " + id);
         }
         else return il;
     }

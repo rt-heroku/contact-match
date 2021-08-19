@@ -52,11 +52,11 @@ public class MatchedController {
         }
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Matched> findMatchedById(
-            @PathVariable long id) {
+    @GetMapping(value = "/{jobid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Matched>> findMatchedByJobId(
+            @PathVariable String jobid) {
         try {
-            Matched matched = matchedService.findById(id);
+            List<Matched >matched = matchedService.findByJobId(jobid);
             return ResponseEntity.ok(matched);  // return 200, with json body
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // return 404, with null body
